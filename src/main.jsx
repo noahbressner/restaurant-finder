@@ -40,5 +40,10 @@ try {
   )
 } catch (e) {
   console.error('Render error:', e)
-  document.getElementById('root').innerHTML = `<pre style="color:red">Error: ${e.message}</pre>`
+  const root = document.getElementById('root')
+  root.textContent = '' // Clear existing content
+  const pre = document.createElement('pre')
+  pre.style.color = 'red'
+  pre.textContent = `Error: ${e.message}` // Using textContent prevents XSS
+  root.appendChild(pre)
 }
